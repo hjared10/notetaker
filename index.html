@@ -9,36 +9,67 @@
     padding: 2%;
 }
         </style>
+        <script src="https://code.jquery.com/jquery.js"></script>
     </head>
+
     <body>
-<div id = 'text'><button id = 'startbtn' onclick="start()"></button></div>
+
+<div id = 'text'><button id = 'startbtn' onclick="start()">Click here to start!</button></div>
+
+<input type="text" id = 'entry'></div><button id='entrbtn' onclick="add()">Click here to save as note!</button>
+<br />
+<input type="text" id = 'rem'></div><button id='rembtn' onclick="remover()">Type the number of the note you wanted deleted, then click here.</button>
+
         <script type="text/javascript">
-var data = [
-    "Death?  Its only the beginning.",
-    "That which is life, unto itself is drawn.",
-    "it is plesant, is it not?  To rest on the bank with the wind and waves and to watch the struggles of another.",
-    "The flames burned with power.  Some were massive columns, a veritable inferno.  Some were smaller, but still vigirous, but at the end of the hall, in the corner, some of the flames were smaller.  Some wept with little light, and some barely fumed with smoke.  Over the corner, at the end of the room, sat the smallest cinders.  They seemed to whimper, and plead, and for a second it sputered and almost went out.  And youll ask, whose is that dying light?  and the answer will come, yours."
-        ]
-console.log(data);
+
+var enter = document.getElementById('entry');
 
 function start() {
-    for (i = 0; i < data.length; i++) {
+    document.getElementById('text').innerHTML = "";
+    $.get("/api/data", function(res) {
+    console.log(res);
+    for (i = 0; i < res.length; i++) {
     let newdiv = document.createElement('p');
     let ele = document.getElementById("text");
-    let txtnfo = document.createTextNode(data[i]);
+    let txtnfo = document.createTextNode(res[i].content);
+    newdiv.classList.add('card');
+    newdiv.classList.add('content'+i);
+    newdiv.appendChild(txtnfo);
+    ele.appendChild(newdiv);
+    console.log(res[i].content);
+    }
+})
+}
+
+function add() {
+$.get("/api/data", function(res) {
+let newernote = {
+    routeName: res.length,
+    content: $('#entry').val()
+}
+$.post("/api/data", newernote)
+start();
+})}
+
+function remover() {
+    $.get("/api/data", function(res) {
+        let data = res;
+console.log('Deleted!');
+document.getElementById('text').innerHTML = "";
+let x = $('#rem').val();
+var removed = data.splice(x+1, 1);
+for (i = 0; i < data.length; i++) {
+    let newdiv = document.createElement('p');
+    let ele = document.getElementById("text");
+    let txtnfo = document.createTextNode(data[i].content);
     newdiv.classList.add('card');
     newdiv.appendChild(txtnfo);
     ele.appendChild(newdiv);
-    console.log(data[i]);
-    }
-}
+    console.log(data[i].content);
 
-//var para = document.createElement("p");
-//var node = document.createTextNode("This is new.");
-//para.appendChild(node);
-//var element = document.getElementById("div1");
-//element.appendChild(para);
 
+    //var removed = arr.splice(2,2);/*removed === [3, 4]arr === [1, 2, 5, 6, 7, 8, 9, 0]*/
+}})}
         </script>
     </body>
 </html>
