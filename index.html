@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang = eng>
+    <head>
+        <title>Note Taker</title>
+        <style>
+#text {
+    text-align: center;
+    margin: 2%;
+    padding: 2%;
+}
+        </style>
+    </head>
+    <body>
+<div id = 'text'><button id = 'startbtn' onclick="start()"></button></div>
+        <script type="text/javascript">
+var data = [
+    "Death?  Its only the beginning.",
+    "That which is life, unto itself is drawn.",
+    "it is plesant, is it not?  To rest on the bank with the wind and waves and to watch the struggles of another.",
+    "The flames burned with power.  Some were massive columns, a veritable inferno.  Some were smaller, but still vigirous, but at the end of the hall, in the corner, some of the flames were smaller.  Some wept with little light, and some barely fumed with smoke.  Over the corner, at the end of the room, sat the smallest cinders.  They seemed to whimper, and plead, and for a second it sputered and almost went out.  And youll ask, whose is that dying light?  and the answer will come, yours."
+        ]
+console.log(data);
+
+function start() {
+    for (i = 0; i < data.length; i++) {
+    let newdiv = document.createElement('p');
+    let ele = document.getElementById("text");
+    let txtnfo = document.createTextNode(data[i]);
+    newdiv.classList.add('card');
+    newdiv.appendChild(txtnfo);
+    ele.appendChild(newdiv);
+    console.log(data[i]);
+    }
+}
+
+//var para = document.createElement("p");
+//var node = document.createTextNode("This is new.");
+//para.appendChild(node);
+//var element = document.getElementById("div1");
+//element.appendChild(para);
+
+        </script>
+    </body>
+</html>
