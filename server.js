@@ -9,19 +9,18 @@ app.use(express.json());
 
 var data = [
 
-{routeName: 'death', 
+{routeName: '1', 
   content: "Death?  Its only the beginning."},
 
-{routeName: 'life', 
+{routeName: '2', 
   content:"That which is life, unto itself is drawn."},
   
-{routeName: 'River',
+{routeName: '3',
 content: "it is plesant, is it not?  To rest on the bank with the wind and waves and to watch the struggles of another.",
 },
 {
-  routeName: 'fire',
-  content:"The flames burned with power.  Some were massive columns, a veritable inferno.  Some were smaller, but still vigirous, but at the end of the hall, in the corner, some of the flames were smaller.  Some wept with little light, and some barely fumed with smoke.  Over the corner, at the end of the room, sat the smallest cinders.  They seemed to whimper, and plead, and for a second it sputered and almost went out.  And youll ask, whose is that dying light?  and the answer will come, yours."
-}
+  routeName: '4',
+  content:"The roman had had enough.  He screamed at Atilla: why are you doing this?!  and Atilla responded - I shall do unto the romans as they would have done unto me."}
 ]
 
 app.get("/", function(req, res) {
